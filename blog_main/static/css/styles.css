@@ -1,0 +1,204 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #121212;
+    /* Set dark background color */
+    color: #fff;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1em 0;
+}
+
+.container_blog {
+    margin: 0 auto;
+    width: 85%;
+    margin-top: 1em;
+    padding: 1em;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgb(0, 122, 204);
+
+}
+
+#container {
+    margin: 0 auto;
+    width: 85%;
+    margin-top: 1em;
+    padding: 1em;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgb(0, 17, 255);
+}
+
+a {
+    text-decoration: none;
+    color: #0091ff;
+    /* Optional: Set link color */
+}
+
+h1 {
+    margin: 0;
+    cursor: default;
+    /* Remove pointer cursor from h1 */
+}
+
+h1:hover {
+    text-decoration: none;
+    /* Add underline on hover */
+}
+
+#postFormContainer {
+    margin: 0 auto;
+    width: 85%;
+    margin-top: 1em;
+    padding: 1em;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgb(0, 17, 255);
+}
+
+#postForm label {
+    display: block;
+    margin-bottom: 0.5em;
+    color: #fff;
+}
+
+#postForm input {
+    width: 95%;
+    margin-bottom: 1em;
+    background-color: #444;
+    /* Set input background color */
+    border: 1px solid #ffffff;
+    border-radius: 20px;
+    padding: 0.5em;
+    color: #fff;
+}
+
+#postForm textarea {
+    width: 95%;
+    margin-bottom: 1em;
+    background-color: #333;
+    /* Set input background color */
+    border: 1px solid #444;
+    border-radius: 20px;
+    padding: 0.5em;
+    color: #fff;
+    height: 150px;
+    resize: both;
+    /* Allow horizontal resizing */
+    max-width: 100%;
+    /* Constrain maximum width to container width */
+}
+
+#postForm input:focus,
+#postForm textarea:focus {
+    border-color: #fff;
+}
+
+button {
+    background-color: #4400ff;
+    border: none;
+    color: #fff;
+    padding: 0.5em 1em;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+button:hover {
+    background-color: #0091ff;
+    box-shadow: 0 0 10px #0091ff, 0 0 20px #0091ff, 0 0 30px #0091ff;
+}
+
+main {
+    padding: 1em;
+}
+
+.blog-post {
+    position: relative;
+    /* Ensure absolute positioning for the button */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgb(255, 255, 255);
+    padding: 1em;
+    margin-bottom: 1em;
+    background-color: #1e1e1e;
+    /* Optional: Set a background color for the blog post */
+    overflow: hidden;
+    /* Ensure content stays inside container */
+}
+
+.blog-post button {
+    position: absolute;
+    top: 10px;
+    /* Adjust as needed */
+    right: 10px;
+    /* Adjust as needed */
+    background-color: #4400ff;
+    border: none;
+    color: #fff;
+    padding: 0.5em 1em;
+    cursor: pointer;
+    border-radius: 4px;
+    display: none;
+    /* Initially hide the button */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    /* Add transition for smooth effect */
+}
+
+.blog-post:hover button {
+    display: block;
+    /* Show the button on hover */
+}
+
+.blog-post button:hover {
+    background-color: #0091ff;
+    box-shadow: 0 0 10px #0091ff, 0 0 20px #0091ff, 0 0 30px #0091ff;
+    /* Add glowing effect */
+}
+
+.blog-post h2 {
+    color: #ffffff;
+    margin-top: 0;
+}
+
+.blog-post h2:hover {
+    text-decoration: underline;
+    /* Add underline on hover */
+}
+
+.blog-post p {
+    color: #d3d1d1;
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+
+.blog-post-container {
+    width: 90%;
+    /* Set a slightly smaller width */
+    max-width: 1600px;
+    /* Set a maximum width to prevent it from getting too wide */
+    margin: 0 auto;
+    /* Center the container horizontally */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgb(255, 255, 255);
+    padding: 1em;
+    margin-bottom: 1em;
+    overflow: hidden;
+    /* Ensure content stays inside container */
+    word-wrap: break-word;
+}
+
+.blog-post-container h2 {
+    color: #fff;
+    margin-top: 0;
+    width: 20px auto;
+    height: auto;
+}
+
+.blog-post-container p {
+    color: #d3d1d1;
+    line-height: 1.6;
+    margin-bottom: 0;
+}
