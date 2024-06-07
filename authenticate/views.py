@@ -9,6 +9,7 @@ from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
 from .tokens import generate_token
+from django.contrib.auth.decorators import login_required
 
 def signup(request):
     if request.method == 'POST':
@@ -65,6 +66,9 @@ def signup(request):
     
     return render(request, 'signup.html')
 
+
+
+
 def sign_in(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -73,19 +77,14 @@ def sign_in(request):
         user = authenticate(username=username, password=password)
 
         if user is not None:
-           
-            if user.is_active==True:  # Check if the user account is active
-                login(request, user)
-                return redirect('blog')  # Redirect to 'blog' after successful login
-            else:
-                messages.error(request, "Your account is not activated yet. Please activate your account by clicking the link sent to your email.")
-                return redirect('sign_in')
+            login(request, user)
+            return redirect('blog')  # Redirect to 'blog' after successful login
+        
         else:
-            messages.error(request, "Could not login.Please make sure that you have activated your account by clicking the link sent to your email or invalid username or password. Please try again.")
+            messages.error(request, "Invalid username or password. Please try again.")
             return redirect('sign_in')
-       
-    return render(request, 'login.html')
-
+    return render(request, 'login.html')   
+   
 
 def activate(request, uidb64, token):
     try:
