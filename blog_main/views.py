@@ -4,7 +4,7 @@ from blog.models import Blog
 
 
 def home(request): 
-    return render(request, 'login.html')
+    return render(request, 'blog_list.html')
 
 
 
