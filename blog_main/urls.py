@@ -18,11 +18,13 @@ from django.contrib import admin
 from django.urls import include, path
 
 from . import views
+from blog.views import BlogList
 
 urlpatterns = [
     path('admin/', admin.site.urls),
    
-    path('', views.home, name='home'),
+    path('login/', views.home, name='home'),
+    path('',BlogList.as_view(),name='blog'),
     path('blog/', include('blog.urls')),
     path('authenticate/', include('authenticate.urls')),
     ]
