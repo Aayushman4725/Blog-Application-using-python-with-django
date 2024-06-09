@@ -21,29 +21,35 @@ class BlogList(ListView):
         else:
             context['blogs'] = self.get_queryset()
 
+        # if self.request.user.is_authenticated:
+        #     context['blogs'] = context['blogs'].filter(user=self.request.user)
+        
+        context['search_input'] = search_input
+        return context
+    
+
+class UserList(LoginRequiredMixin,ListView):
+    model = Blog
+    template_name = 'user_list.html'
+    context_object_name = 'blogs'  
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # context['blogs'] = context['blogs'].filter(user=self.request.user)
+        search_input = self.request.GET.get('search_area') or ''
+        
+        if search_input:
+            context['blogs'] =  context['blogs'].filter(title__startswith=search_input)
+        else:
+            context['blogs'] = self.get_queryset()
+
         if self.request.user.is_authenticated:
             context['blogs'] = context['blogs'].filter(user=self.request.user)
         
         context['search_input'] = search_input
         return context
     
-# class UserList(ListView):
-#     model = Blog
-#     template_name = 'blog_list.html'
-#     context_object_name = 'blogs'  
 
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['blogs'] = context['blogs'].filter(user=self.request.user)
-#         search_input = self.request.GET.get('search_area') or ''
-        
-#         if search_input:
-#             context['blogs'] =  context['blogs'].filter(title__startswith=search_input)
-#         else:
-#             context['blogs'] = self.get_queryset()
-        
-#         context['search_input'] = search_input
-#         return context
 
 
 
