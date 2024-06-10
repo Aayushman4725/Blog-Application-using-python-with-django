@@ -50,14 +50,23 @@
       <div class="col-md-8 offset-md-2">
         <main id="blogList">
           {% for b in blogs %}
-          <div class="card mb-3">
-            <div class="card-header">
-              <h3>{{ b.title }}</h3>
-            </div>
-            <div class="card-body">
-              <p class="card-text">{{ b.blog }}</p>
-            </div>
-          </div>
+          <figure>
+            <blockquote class="blockquote">
+              <div class="card mb-3">
+                <div class="card-header">
+                  <h3>{{ b.title }}</h3>
+                </div>
+                <div class="card-body">
+                  <p class="card-text">{{ b.blog }}</p>
+                  <figcaption class="blockquote-footer fs-6">
+                    Posted By:
+                    <cite>{{b.user}}</cite>
+                  </figcaption>
+                </div>
+              </div>
+            </blockquote>
+          </figure>
+
           {% endfor %}
         </main>
       </div>
