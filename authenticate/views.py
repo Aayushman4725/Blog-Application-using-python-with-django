@@ -9,7 +9,10 @@ from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
 from .tokens import generate_token
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth import get_user_model
+
+User=get_user_model()
+
 
 def signup(request):
     if request.method == 'POST':
@@ -30,7 +33,7 @@ def signup(request):
             messages.error(request, "Passwords do not match!")
             return redirect('sign_up')
 
-        myUser = User.objects.create_user(username, email, password)
+        myUser = User.objects.create_user(email, username, password)
         myUser.is_active = False
         myUser.save()
 
@@ -71,10 +74,10 @@ def signup(request):
 
 def sign_in(request):
     if request.method == 'POST':
-        username = request.POST['username']
+        email = request.POST['email']
         password = request.POST['password']  
        
-        user = authenticate(username=username, password=password)
+        user = authenticate(email=email, password=password)
 
         if user is not None:
             login(request, user)
@@ -106,5 +109,5 @@ def activate(request, uidb64, token):
 def signout(request):
     logout(request)
     messages.success(request,("Successfully signed out"))
-    return redirect('home')
+    return redirect('blog')
 
