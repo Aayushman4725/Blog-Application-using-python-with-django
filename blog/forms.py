@@ -17,7 +17,7 @@ class BlogEdit(forms.ModelForm):
         fields = ['title', 'blog']
 
         widget = {
-            'title' : forms.TextInput(attrs={'class': 'form-control'}),
-            'blog' : forms.TextInput(attrs={'class': 'form-control'}),
+            'title' : forms.TextInput(attrs={'class': 'form-control', 'id': 'floatingInput','placeholder': 'Enter a title'}),
+            'blog' : forms.TextInput(attrs={'class': 'form-control', 'id': 'floatingInput', 'placeholder':'Write the blog here...'}),
            
         }  
