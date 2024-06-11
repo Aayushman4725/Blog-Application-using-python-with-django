@@ -4,21 +4,35 @@
     <div class="container">
       <div class="d-flex justify-content-between align-items-center">
         <div class="grid gap-2">
+          <div class="position-absolute top-2 start-0">
+            <img
+              src="{{request.user.profile_picture.url}}"
+              style="width: 7%; height: 7%; border-radius: 80%"
+              alt="profile"
+            />
+          </div>
+
           <h4 class="display-6">User Dashboard</h4>
 
           <h4 class="text-center display-6">Welcome, {{request.user}}</h4>
         </div>
 
         <div class="grid row-gap-3">
-          <form action="{% url 'sign_out' %}" method="POST">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-danger p-2 g-col-6">
-              Sign Out
-            </button>
-          </form>
-          <a href="{% url 'blog' %}" class="btn btn-success btn-sm p-2 g-col-6"
-            >Go back</a
-          >
+          <div class="p-2">
+            <form action="{% url 'sign_out' %}" method="POST">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-danger p-2 g-col-6">
+                Sign Out
+              </button>
+            </form>
+          </div>
+          <div class="p-2">
+            <a
+              href="{% url 'blog' %}"
+              class="btn btn-success btn-sm p-2 g-col-6"
+              >Go back</a
+            >
+          </div>
         </div>
       </div>
     </div>
