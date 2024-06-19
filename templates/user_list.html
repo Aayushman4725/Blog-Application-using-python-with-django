@@ -1,20 +1,21 @@
 {% extends 'main.html' %} {% load static %} {% block content %}
 <body>
-  <header class="bg-primary py-3">
-    <div class="container">
-      <div class="d-flex justify-content-between align-items-center">
-        <div class="grid gap-2">
-          <div class="position-absolute top-2 start-0">
-            <img
-              src="{{request.user.profile_picture.url}}"
-              style="width: 7%; height: 7%; border-radius: 80%"
-              alt="profile"
-            />
-          </div>
+  <div class="border">
+    <header class="bg-primary margin nav">
+      <div class="d-flex justify-content-center">
+        <div class="image">
+          <img
+            src="{{request.user.profile_picture.url}}"
+            style="width: 20%; height: 20%"
+            alt="profile"
+            class="rounded-circle"
+          />
+        </div>
 
-          <h4 class="display-6">User Dashboard</h4>
+        <div class="ml-5">
+          <h4 class="display-6 ml-5">User Dashboard</h4>
 
-          <h4 class="text-center display-6">Welcome, {{request.user}}</h4>
+          <h4 class="text-center display-6 ml-5">Welcome, {{request.user}}</h4>
         </div>
 
         <div class="grid row-gap-3">
@@ -35,61 +36,61 @@
           </div>
         </div>
       </div>
-    </div>
-  </header>
-  <div class="container mt-4">
-    <form method="GET">
-      <input
-        type="text"
-        id="search_area"
-        name="search_area"
-        class="form-control"
-        value="{{ search_input }}"
-      />
-      <button type="submit" class="btn btn-primary mt-2">Search</button>
-    </form>
+    </header>
+    <div class="container mt-4">
+      <form method="GET">
+        <input
+          type="text"
+          id="search_area"
+          name="search_area"
+          class="form-control"
+          value="{{ search_input }}"
+        />
+        <button type="submit" class="btn btn-primary mt-2">Search</button>
+      </form>
 
-    <hr />
-    <div class="row">
-      <div class="col-md-6 offset-md-3">
-        <div class="card">
-          <a
-            href="{% url 'create_blog' %} "
-            class="btn btn-success btn-outline-white"
-            >Create a blog</a
-          >
+      <hr />
+      <div class="row">
+        <div class="col-md-6 offset-md-3">
+          <div class="card">
+            <a
+              href="{% url 'create_blog' %} "
+              class="btn btn-success btn-outline-white"
+              >Create a blog</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-4">
+        <div class="col-md-8 offset-md-2">
+          <main id="blogList">
+            {% for b in blogs %}
+            <div class="card mb-3">
+              <div class="card-header">
+                <h3>{{ b.title }}</h3>
+              </div>
+              <div class="card-body">
+                <p class="card-text">{{ b.blog }}</p>
+                <a class="btn btn-primary" href="{% url 'edit_blog' b.id %}"
+                  >Edit</a
+                >
+                <a class="btn btn-danger" href="{% url 'delete_blog' b.id %}"
+                  >Delete</a
+                >
+              </div>
+            </div>
+            {% endfor %}
+          </main>
         </div>
       </div>
     </div>
-
-    <div class="row mt-4">
-      <div class="col-md-8 offset-md-2">
-        <main id="blogList">
-          {% for b in blogs %}
-          <div class="card mb-3">
-            <div class="card-header">
-              <h3>{{ b.title }}</h3>
-            </div>
-            <div class="card-body">
-              <p class="card-text">{{ b.blog }}</p>
-              <a class="btn btn-primary" href="{% url 'edit_blog' b.id %}"
-                >Edit</a
-              >
-              <a class="btn btn-danger" href="{% url 'delete_blog' b.id %}"
-                >Delete</a
-              >
-            </div>
-          </div>
-          {% endfor %}
-        </main>
-      </div>
-    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <script src="{% static 'js/script.js' %}"></script>
   </div>
-  <script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-    crossorigin="anonymous"
-  ></script>
-  <script src="{% static 'js/script.js' %}"></script>
 </body>
 {% endblock %}

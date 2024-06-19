@@ -1,7 +1,6 @@
 {% extends 'main.html' %} {% block content %}
-
-<div class="container mt-3">
-  <div class="card text-center mx-4 offset-md-4">
+<div class="border">
+  <div class="container mt-3">
     <form method="post" action="{% url 'delete_blog' blog.id %}">
       {% csrf_token %}
       <p>Are you sure you want to delete this blog? Title: {{blog.title}}</p>

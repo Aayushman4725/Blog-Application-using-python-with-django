@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -15,8 +16,13 @@
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
   </head>
   <body>
-    {% include 'message.html' %} {% block content %} {% endblock %}
+    <div class="">
+      <div class="container mt-5">
+        {% include 'message.html' %} {% block content %} {% endblock %}
+      </div>
+    </div>
   </body>
 </html>
