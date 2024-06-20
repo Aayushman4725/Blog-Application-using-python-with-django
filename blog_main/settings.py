@@ -44,7 +44,18 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog',
     'authenticate',
+    'tailwind',
+    'theme',
+    'django_browser_reload',
 ]
+
+TAILWIND_APP_NAME = 'theme'
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
+
+NPM_BIN_PATH = "C:/Program Files/nodejs/npm.cmd"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -54,6 +65,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_browser_reload.middleware.BrowserReloadMiddleware',
 ]
 
 ROOT_URLCONF = 'blog_main.urls'
@@ -121,6 +133,7 @@ USE_TZ = True
 LOGIN_URL = 'sign_in'
 
 AUTH_USER_MODEL = 'authenticate.CustomUser'
+
 
 
 
