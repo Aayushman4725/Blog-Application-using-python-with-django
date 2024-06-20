@@ -29,5 +29,6 @@ urlpatterns = [
     path('',BlogList.as_view(),name='blog'),
     path('blog/', include('blog.urls')),
     path('authenticate/', include('authenticate.urls')),
+     path("__reload__/", include("django_browser_reload.urls")),
     ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
