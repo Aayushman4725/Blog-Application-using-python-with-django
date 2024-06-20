@@ -68,11 +68,15 @@ class EditBlog(LoginRequiredMixin ,UpdateView):
     template_name = 'edit_blog.html'
     form_class = BlogEdit
     
-    success_url = reverse_lazy('blog')
+    success_url = reverse_lazy('user_dashboard')
+    def get_success_url(self):
+        return reverse_lazy('user_dashboard', kwargs={'pk': self.request.user.pk})
 
 class DeleteBlog(LoginRequiredMixin ,DeleteView):
     model = Blog
     template_name = 'delete_blog.html'
     get_object_name = 'blog'
-    success_url = reverse_lazy('blog')
+    success_url = reverse_lazy('user_dashboard')
     
+    def get_success_url(self):
+        return reverse_lazy('user_dashboard', kwargs={'pk': self.request.user.pk})
