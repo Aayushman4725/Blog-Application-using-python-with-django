@@ -1,7 +1,7 @@
 .border{
     padding: 0px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    box-shadow: 10px 10px #8CB9BD;
+    box-shadow: 10px 10px grey;
     border-color:black ;
     border-radius: 30px;
     width: 80%;
@@ -12,7 +12,10 @@
     align-items: stretch; /* Stretch children to fit width */
     justify-content: center;
     
+    
 }
+
+
 
 .margin{
     margin: 1px;
