@@ -17,11 +17,12 @@
       crossorigin="anonymous"
     ></script>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
     {% tailwind_css %}
   </head>
   <body>
     <div class="">
-      <div class="container mt-5">
+      <div class="">
         {% include 'message.html' %} {% block content %} {% endblock %}
       </div>
     </div>
