@@ -101,3 +101,23 @@
     flex-grow: 1;
     margin-left: 10px;
 }
+
+
+.border-2{
+    padding: 4px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    box-shadow: 10px 10px grey;
+    border-color:black ;
+    border-radius: 30px;
+    width: 80%;
+    border: 1px solid #ccc;
+    display: flex; /* Use flexbox */
+    flex-direction: column; /*Stack children vertically*/
+    align-items: stretch; /* Stretch children to fit width */
+}
+
+.ml-6{
+    margin: auto;
+    margin-top: 4em;
+    margin-left: 10px;
+}
