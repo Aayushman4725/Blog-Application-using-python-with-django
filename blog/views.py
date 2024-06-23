@@ -1,10 +1,14 @@
-from django.shortcuts import render, redirect
-from blog.models import Blog
+from django.shortcuts import render, redirect,get_object_or_404
+from authenticate.models import Comment
+from blog.models import Blog,Like
 from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView,UpdateView,DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-from .forms import BlogForm,BlogEdit
+from .forms import BlogForm,BlogEdit,ComentForm
+from django.views import View
+
 
 class BlogList(ListView):
     model = Blog
@@ -80,3 +84,52 @@ class DeleteBlog(LoginRequiredMixin ,DeleteView):
     
     def get_success_url(self):
         return reverse_lazy('user_dashboard', kwargs={'pk': self.request.user.pk})
+    
+
+def liked_blog(request, pk):
+   
+        blog = get_object_or_404(Blog, pk=pk)
+        if not Like.objects.filter(user=request.user, blog=blog).exists():
+            Like.objects.create(user=request.user, blog=blog)
+        else:
+            like = Like.objects.filter(user=request.user, blog=blog).first()
+            like.delete()
+        return redirect('blog')   # Make sure 'blog' is the correct name of the URL pattern for your blog list or detail view.
+
+class CommentView(View):
+    form_class = ComentForm
+    template_name = 'comment.html'
+    success_url = reverse_lazy('blog')  # Replace with your actual success URL
+
+    def get_blog(self, pk):
+        # Fetch the Blog instance using pk
+        try:
+            return Blog.objects.get(pk=pk)
+        except Blog.DoesNotExist:
+            return None
+    
+    def post(self, request, pk, *args, **kwargs):
+        blog = self.get_blog(pk)
+        if blog is None:
+            # Handle case where blog with given pk doesn't exist
+            return render(request, '404.html')  # Example, customize as needed
+
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            # Assign the logged-in user to the 'user' field of the Comment instance
+            form.instance.user = request.user
+            # Assign the blog instance to the 'blog' field of the Comment instance
+            form.instance.blog = blog
+            form.save()  # Save the form instance to persist the comment
+            return redirect(self.success_url)
+        else:
+            return render(request, 'comment.html', {'form': form, 'blog': blog})
+
+class CommentDetail(ListView):
+    model = Comment
+    template_name = 'comentDetail.html'
+    context_object_name = 'comments'
+
+    def get_queryset(self):
+        pk = self.kwargs.get('pk')
+        return Comment.objects.filter(blog_id=pk)
