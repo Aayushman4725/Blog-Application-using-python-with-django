@@ -6,11 +6,13 @@ from django.conf import settings
 from django.core.mail import send_mail, EmailMessage
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
+from django.urls import reverse_lazy
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
 from .tokens import generate_token
 from django.contrib.auth import get_user_model
-
+from django.contrib.auth.views import PasswordResetView
+from django.contrib.messages.views import SuccessMessageMixin
 User=get_user_model()
 
 
@@ -111,3 +113,9 @@ def signout(request):
     messages.success(request,("Successfully signed out"))
     return redirect('blog')
 
+class CustomPasswordResetView(SuccessMessageMixin,PasswordResetView):
+    template = 'password_reset_form.html'
+    email_template_name = 'password_reset_email.html'
+    subject_template_name = 'password_reset_subject.txt'
+    success_message = 'Please check your email for the password reset.'
+    success_url = reverse_lazy('blog')
