@@ -31,25 +31,25 @@
 
     <div class="dash-blog-container">
       <div class="dash-container">
-        <div class="image">
-          <img
-            src="{{request.user.profile_picture.url}}"
-            alt="profile"
-            class="rounded-circle image focus:outline-none focus:ring focus:border-blue-300 w-full"
-          />
+        <div class="about border-2 gap-3">
+          <div class="image">
+            <img
+              src="{{user.profile.profile_picture.url}}"
+              alt="profile"
+              class="rounded-circle image focus:outline-none focus:ring focus:border-blue-300 w-full"
+            />
+            <!-- <input type="file" name = "pic"> -->
+          </div>
+          <div class="border-3">
+            <h5 class="display-5"><strong>About</strong></h5>
+            {% if user.profile.about %} {{user.profile.about}} {% endif %}
+          </div>
         </div>
 
-        <div class="about border-2 gap-2">
-          <h5 class="display-5"><strong>About</strong></h5>
-          {{request.user.about}}
-        </div>
-
-        <div>
-
-        </div>
+        <div></div>
       </div>
 
-      <div class="blog-container">
+      <div class="blog-container mt-2">
         <div class="border d-flex">
           <div class="container mt-4 d-flex flex-column gap-4">
             <form method="GET">
