@@ -13,6 +13,7 @@ from .tokens import generate_token
 from django.contrib.auth import get_user_model
 from django.contrib.auth.views import PasswordResetView
 from django.contrib.messages.views import SuccessMessageMixin
+from .models import Profile
 User=get_user_model()
 
 
@@ -83,6 +84,8 @@ def sign_in(request):
 
         if user is not None:
             login(request, user)
+            Profile.objects.get_or_create(user=user)
+
             return redirect('blog')  # Redirect to 'blog' after successful login
         
         else:
