@@ -8,6 +8,12 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from .forms import BlogForm,BlogEdit,ComentForm
 from django.views import View
+from django.contrib.auth.models import User
+from authenticate.models import Profile
+from django.contrib.auth import get_user_model
+
+
+User=get_user_model()
 
 
 class BlogList(ListView):
@@ -42,6 +48,7 @@ class UserList(LoginRequiredMixin,ListView):
         # context['blogs'] = context['blogs'].filter(user=self.request.user)
         search_input = self.request.GET.get('search_area') or ''
         
+        
         if search_input:
             context['blogs'] =  context['blogs'].filter(title__startswith=search_input)
         else:
@@ -49,6 +56,8 @@ class UserList(LoginRequiredMixin,ListView):
 
         if self.request.user.is_authenticated:
             context['blogs'] = context['blogs'].filter(user=self.request.user)
+            profile, created = Profile.objects.get_or_create(user=self.request.user)
+            context['profile'] = profile
         
         context['search_input'] = search_input
         return context
@@ -133,3 +142,8 @@ class CommentDetail(ListView):
     def get_queryset(self):
         pk = self.kwargs.get('pk')
         return Comment.objects.filter(blog_id=pk)
+
+
+# def change_profile_pic(request,pk):
+#     user = get_object_or_404(User, pk=pk)
+    
