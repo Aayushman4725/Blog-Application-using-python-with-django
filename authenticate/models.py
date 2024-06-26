@@ -8,11 +8,8 @@ from blog.models import Blog
 
 class CustomUser(AbstractUser):
     username = models.CharField(_("Username"), max_length=100, unique=True)
-    profile_picture = models.ImageField(_("Profile"),upload_to='images/profile_pic', blank=True, null=True)
     email = models.EmailField(_("Email"), unique=True)
-    phone_number = models.CharField(_("Phone Number"),max_length=15, blank=True, null=True)
-    about = models.TextField(_("About"), blank=True, null=True)
-    comment = models.TextField(_("Comment"), blank=True, null=True)
+    # comment = models.TextField(_("Comment"), blank=True, null=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']  # Add 'username' to REQUIRED_FIELDS
@@ -30,3 +27,12 @@ class Comment(models.Model):
 
     def __str__(self):
         return f"Comment by {self.user.username} on {self.blog.title}"
+    
+class Profile(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    profile_picture = models.ImageField(default='images/profile_picture/default.jpg', upload_to='images/profile_picture')
+    phone_number = models.CharField(_("Phone Number"), max_length=15, blank=True, null=True)
+    about = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return self.user.username
