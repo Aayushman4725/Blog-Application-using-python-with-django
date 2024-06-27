@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
+import os
 from pathlib import Path
 from . info import *
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,7 +26,9 @@ EMAIL_PORT = EMAIL_PORT
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-3xn*3*o4qd)&#$+zt5j@f0=fv_burb)#+jhje_&-+5n#b=k3+s'
+from dotenv import load_dotenv
+load_dotenv()
+SECRET_KEY = str(os.getenv('SECRET_KEY'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
