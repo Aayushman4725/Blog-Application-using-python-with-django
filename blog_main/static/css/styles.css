@@ -120,7 +120,7 @@
 
 .border-3{
     padding :10px;
-    border-width:thin;
+    border-width: 1px solid;
     border-radius: 20px;
 }
 
