@@ -3,7 +3,7 @@ from django import forms
 from django.contrib.auth.models import User
 from authenticate.models import Comment
 from django.contrib.auth import get_user_model
-
+from authenticate.models import Profile
 User = get_user_model()
 
 class BlogForm(forms.ModelForm):
@@ -58,3 +58,14 @@ class ComentForm(forms.ModelForm):
 
         return comment_instance
 
+class EditProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['profile_picture', 'about']
+
+
+        widgets = {
+           
+            'about' : forms.Textarea(attrs={'class': 'form-control', 'id': 'floatingInput','placeholder': 'Enter a comment'}),
+           
+        }  
