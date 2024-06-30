@@ -6,11 +6,12 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView,UpdateView,DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-from .forms import BlogForm,BlogEdit,ComentForm
+from .forms import BlogForm,BlogEdit,ComentForm,EditProfileForm
 from django.views import View
 from django.contrib.auth.models import User
 from authenticate.models import Profile
 from django.contrib.auth import get_user_model
+
 
 
 User=get_user_model()
@@ -147,3 +148,14 @@ class CommentDetail(ListView):
 # def change_profile_pic(request,pk):
 #     user = get_object_or_404(User, pk=pk)
     
+class EditProfile(UpdateView):
+    form_class = EditProfileForm
+    template_name = 'EditProfile.html'
+    
+    success_url = reverse_lazy('user_dashboard')
+    
+    def get_object(self, queryset=None):
+        return get_object_or_404(Profile, user=self.request.user)
+
+    def get_success_url(self):
+        return reverse_lazy('user_dashboard', kwargs={'pk': self.request.user.pk})
