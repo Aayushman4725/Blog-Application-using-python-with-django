@@ -1,7 +1,7 @@
 from django.urls import path
 
 from . import views
-from  .views import BlogList,createBlog,EditBlog,DeleteBlog,UserList,CommentView,CommentDetail
+from  .views import BlogList,createBlog,EditBlog,DeleteBlog,UserList,CommentView,CommentDetail,EditProfile
 
 urlpatterns = [
      
@@ -14,4 +14,5 @@ urlpatterns = [
     path('like/<int:pk>',views.liked_blog, name='like'),
     path('comments/<int:pk>',CommentView.as_view() , name='comments'),
     path('<int:pk>/commentView/', CommentDetail.as_view(), name='commentDetail'),
+    path('update_profile/<int:pk>',EditProfile.as_view() , name='editProfile'),
 ]
