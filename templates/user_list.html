@@ -38,12 +38,18 @@
               alt="profile"
               class="rounded-circle image focus:outline-none focus:ring focus:border-blue-300 w-full"
             />
+
             <!-- <input type="file" name = "pic"> -->
           </div>
-          <div class="border-3">
+          <div class="about">
             <h5 class="display-5"><strong>About</strong></h5>
             {% if user.profile.about %} {{user.profile.about}} {% endif %}
           </div>
+          <a
+            href="{% url 'editProfile' request.user.pk %}"
+            class="btn btn-primary"
+            >Edit Profile</a
+          >
         </div>
 
         <div></div>
