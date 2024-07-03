@@ -77,14 +77,7 @@
                         <div
                           class="d-flex align-items-start justify-content-space-between gap-3"
                         >
-                          <div class="d-flex gap-2">
-                            <a
-                              class="btn btn-primary"
-                              href="{% url 'like' b.pk %}"
-                              ><i class="fa fa-thumbs-up"></i
-                            ></a>
-                            <span>{{ b.likes_count }}</span>
-                          </div>
+                         {% include 'like.html' with b=b %}
 
                           <form
                             action="{% url 'comments' pk=b.pk %}"
