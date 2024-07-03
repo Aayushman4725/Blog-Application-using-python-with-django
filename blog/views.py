@@ -104,7 +104,7 @@ def liked_blog(request, pk):
         else:
             like = Like.objects.filter(user=request.user, blog=blog).first()
             like.delete()
-        return redirect('blog')   # Make sure 'blog' is the correct name of the URL pattern for your blog list or detail view.
+        return render(request, 'like.html', {'b': blog})   # Make sure 'blog' is the correct name of the URL pattern for your blog list or detail view.
 
 class CommentView(View):
     form_class = ComentForm
