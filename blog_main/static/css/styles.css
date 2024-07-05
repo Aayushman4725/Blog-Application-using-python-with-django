@@ -10,6 +10,7 @@
     flex-direction: column; /*Stack children vertically*/
     align-items: stretch; /* Stretch children to fit width */
     justify-content: space-between;
+    margin-left: 50px;
     
     
 }
@@ -69,26 +70,21 @@
     
 }
 
-.dash-container{
-    display: flex;
-    flex-direction: column;
-    /* flex : 1; */
-    flex-grow: 1;
-    justify-content: space-between;
-    
+.dash-container {
+    flex: 1; /* Grow to take up available space */
+    margin-right: 1em; /* Add spacing between containers */
 }
 
-.blog-container{
-    display: flex;
-    justify-content: center;
-    flex-grow: 3;
-   
+.blog-container {
+    flex: 2; 
 }
 
 .dash-blog-container{
     display: flex;
     justify-content: space-evenly;
-    gap: 2 em;
+     gap: 2 em;
+     flex-wrap: wrap; /* Ensure children can wrap to new lines */
+
 }
 
 .main-nav{
@@ -99,9 +95,9 @@
 
 .about{
     margin-top: 9px;
-    flex-wrap: wrap;
-    flex-grow: 1;
     margin-left: 10px;
+    display: block; /* Ensures it takes up the full width of the container */
+    width: 100%;
 }
 
 
