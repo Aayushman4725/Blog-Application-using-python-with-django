@@ -49,16 +49,17 @@ class ComentForm(forms.ModelForm):
 
         # Sentiment Analysis
         analyzer = SentimentAnalyzer()
-        sentiment = analyzer.predict(comment_instance.comment_text)
+        sentiment = analyzer.analyze_sentiment(comment_instance.comment_text)  # Use analyze_sentiment instead of predict
 
         # Update fields based on sentiment analysis
-        comment_instance.is_negative = (sentiment == 'negative')
+        comment_instance.is_negative = (sentiment == 0)  # 0 means negative
         comment_instance.needs_review = comment_instance.is_negative
 
         if commit:
             comment_instance.save()
 
         return comment_instance
+
 
 
 class EditProfileForm(forms.ModelForm):
