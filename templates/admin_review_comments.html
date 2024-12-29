@@ -1,0 +1,28 @@
+<h1>Comments Needing Review</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Comment</th>
+            <th>Blog</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for comment in comments %}
+        <tr>
+            <td>{{ comment.comment_text }}</td>
+            <td>{{ comment.blog.title }}</td>
+            <td>
+                <form method="post" action="{% url 'approve_comment' comment.id %}">
+                    {% csrf_token %}
+                    <button type="submit">Approve</button>
+                </form>
+                <form method="post" action="{% url 'delete_comment' comment.id %}">
+                    {% csrf_token %}
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
