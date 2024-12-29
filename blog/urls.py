@@ -1,7 +1,7 @@
 from django.urls import path
 
 from . import views
-from  .views import BlogList,createBlog,EditBlog,DeleteBlog,UserList,CommentView,CommentDetail,EditProfile
+from  .views import BlogList,createBlog,EditBlog,DeleteBlog,UserList,CommentView,CommentDetail,EditProfile,AdminCommentReviewView,approve_comment,delete_comment
 
 urlpatterns = [
      
@@ -15,4 +15,9 @@ urlpatterns = [
     path('comments/<int:pk>',CommentView.as_view() , name='comments'),
     path('<int:pk>/commentView/', CommentDetail.as_view(), name='commentDetail'),
     path('update_profile/<int:pk>',EditProfile.as_view() , name='editProfile'),
+    path('admin/review-comments/', AdminCommentReviewView.as_view(), name='admin_review_comments'),
+    path('comment/<int:pk>/approve/', approve_comment, name='approve_comment'),
+    path('comment/<int:pk>/delete/', delete_comment, name='delete_comment'),
+  
+    
 ]
