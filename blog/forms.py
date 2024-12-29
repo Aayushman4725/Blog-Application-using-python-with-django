@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from authenticate.models import Comment
 from django.contrib.auth import get_user_model
 from authenticate.models import Profile
+from .utils import SentimentAnalyzer
 User = get_user_model()
 
 class BlogForm(forms.ModelForm):
@@ -33,30 +34,32 @@ from django import forms
 class ComentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        fields = [ 'comment_text']  # Assuming 'user' is a ForeignKey in the Comment model
+        fields = ['comment_text']  # 'user' and 'blog' will be assigned in the view
 
         widgets = {
-            'comment_text' : forms.Textarea(attrs={'class': 'form-control', 'id': 'floatingInput','placeholder': 'Enter a comment'}),
-           
-        }  
-
+            'comment_text': forms.Textarea(attrs={
+                'class': 'form-control',
+                'id': 'floatingInput',
+                'placeholder': 'Enter a comment'
+            }),
+        }
 
     def save(self, commit=True):
         comment_instance = super().save(commit=False)
 
-        # Assuming 'user' is a ForeignKey in the Comment model
-        user = comment_instance.user
+        # Sentiment Analysis
+        analyzer = SentimentAnalyzer()
+        sentiment = analyzer.predict(comment_instance.comment_text)
 
-        # Assuming you want to update the 'comment' field in the User model
-        user.comment = comment_instance.comment_text  # Use 'comment_text' from Comment model
+        # Update fields based on sentiment analysis
+        comment_instance.is_negative = (sentiment == 'negative')
+        comment_instance.needs_review = comment_instance.is_negative
 
-        # Save the User model instance if commit is True
         if commit:
-            user.save()
-
-        comment_instance.save()  # Save the Comment instance
+            comment_instance.save()
 
         return comment_instance
+
 
 class EditProfileForm(forms.ModelForm):
     class Meta:
