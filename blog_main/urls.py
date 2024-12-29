@@ -20,6 +20,7 @@ from django.urls import include, path
 from . import views
 from blog.views import BlogList
 from  django.conf import settings
+from blog.views import BlogList, translate_blog_view
 from django.conf.urls.static import static
 
 urlpatterns = [
@@ -29,6 +30,7 @@ urlpatterns = [
     path('',BlogList.as_view(),name='blog'),
     path('blog/', include('blog.urls')),
     path('authenticate/', include('authenticate.urls')),
-     path("__reload__/", include("django_browser_reload.urls")),
+    path("__reload__/", include("django_browser_reload.urls")),
+    path('translate-blog/<int:pk>/', translate_blog_view, name='translate_blog'),
     ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
