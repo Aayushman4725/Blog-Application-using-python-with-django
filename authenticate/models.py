@@ -24,6 +24,8 @@ class Comment(models.Model):
     blog = models.ForeignKey(Blog, on_delete=models.CASCADE)
     comment_text = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
+    is_negative = models.BooleanField(default=False)
+    needs_review = models.BooleanField(default=False)
 
     def __str__(self):
         return f"Comment by {self.user.username} on {self.blog.title}"
